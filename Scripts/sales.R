@@ -1,0 +1,10 @@
+library(ggplot2)
+library(dplyr)
+training <- read.csv('Data/sales_train.csv',stringsAsFactors = F)
+items <- read.csv('Data/items.csv',stringsAsFactors = F)
+categories <- read.csv('Data/item_categories.csv',stringsAsFactors = F)
+shops <- read.csv('Data/shops.csv',stringsAsFactors = F)
+
+items <- merge(items,categories,by = 'item_category_id')
+training$date <- as.Date(training$date,'%d.%m.%Y')
+training <- merge(training,items,by = 'item_id')
