@@ -1,9 +1,10 @@
 library(ggplot2)
 library(dplyr)
-training <- read.csv('Data/sales_train.csv',stringsAsFactors = F)
-items <- read.csv('Data/items.csv',stringsAsFactors = F)
-categories <- read.csv('Data/item_categories.csv',stringsAsFactors = F)
-shops <- read.csv('Data/shops.csv',stringsAsFactors = F)
+library(data.table)
+training <- fread('Data/sales_train.csv',stringsAsFactors = F)
+items <- fread('Data/items.csv',stringsAsFactors = F)
+categories <- fread('Data/item_categories.csv',stringsAsFactors = F)
+shops <- fread('Data/shops.csv',stringsAsFactors = F)
 
 items <- merge(items,categories,by = 'item_category_id')
 training$date <- as.Date(training$date,'%d.%m.%Y')
@@ -20,3 +21,7 @@ shop_monthly_sales <- training %>%
 
 training<- training%>%
   left_join(shop_monthly_sales,by = c('year','month','shop_id','item_id'))
+
+x <- 10
+
+
